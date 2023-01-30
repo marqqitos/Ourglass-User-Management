@@ -1,0 +1,48 @@
+<h1>Users</h1>
+
+<button class="button" (click)="toggleAddNewUser()">Add User</button>
+
+<div *ngIf="showAddNewUser">
+    <div class="container">
+        <div>
+            <p>Username: </p>
+            <input type="text" [(ngModel)]="user.username" value="{{user.username}}" />
+        </div>
+        <div>
+            <p>First Name: </p>
+            <input type="text" [(ngModel)]="user.firstName" value="{{user.firstName}}" />
+        </div>
+        <div>
+            <p>Last Name: </p>
+            <input type="text" [(ngModel)]="user.lastName" value="{{user.lastName}}" />
+        </div>
+        <button id="newUserButton" (click)="registerUser()">Create</button>
+    </div>
+</div>
+
+
+<div id="searchUsers">
+    <h3>Search</h3>
+    <input type="search" [(ngModel)]="searchCriteria" (input)="searchUsers()"/>
+</div>
+
+<table id="users">
+    <thead>
+        <th>Username</th>
+        <th>Full Name</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users" 
+            routerLink="/user/profile" 
+            (click)="setSelectedUser(user)"
+            infiniteScroll
+            [infiniteScrollDistance]="0.5"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="loadMoreUsers()"
+        >
+            <td>{{user.username}}</td>
+            <td>{{displayFullname(user)}}</td>
+        </tr>
+    </tbody>
+    <p *ngIf="!areThereUsers()">No records found</p>
+</table>

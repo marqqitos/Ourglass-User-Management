@@ -1,0 +1,13 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.button {
+    height: 40px;
+    width: 100px;
+    font-size: 15px;
+    background: lightskyblue;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
